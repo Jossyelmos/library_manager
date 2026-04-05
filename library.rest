@@ -17,7 +17,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/authors/69d22dac7316630f393be5d5
+PUT http://localhost:5000/authors/69d2399969288a080bf2df86
 Content-Type: application/json
 
 {
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/books/69d23108a5aa62fbb6d3f091
+PUT http://localhost:5000/books/69d2396869288a080bf2df83
 Content-Type: application/json
 
 {
