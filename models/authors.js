@@ -17,8 +17,7 @@ const authorSchema = new mongoose.Schema({
         required: true
     },
     dod: {
-        type: String,
-        default: Date.now
+        type: String
     },
     biography: {
         type: String

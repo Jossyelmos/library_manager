@@ -1,0 +1,75 @@
+GET http://localhost:5000/authors
+
+###
+GET http://localhost:5000/authors/69d169ad8d8e9deb055dbbd9
+
+###
+POST http://localhost:5000/authors
+Content-Type: application/json
+
+{
+    "firstName": "J.K.",
+    "lastName": "Rowling",
+    "nationality": "British",
+    "dob": "1965-07-31",
+    "biography": "Author of the Harry Potter series."
+}
+
+
+###
+PUT http://localhost:5000/authors/69d22dac7316630f393be5d5
+Content-Type: application/json
+
+{
+    "firstName": "J.Kennedy",
+    "lastName": "Rowling",
+    "nationality": "British",
+    "dob": "1965-07-31",
+    "biography": "Author of the Harry Potter series."
+}
+
+
+###
+DELETE http://localhost:5000/authors/69d22ec0a5aa62fbb6d3f085
+
+
+###
+GET http://localhost:5000/books
+
+
+###
+GET http://localhost:5000/books/69d1826437d6832b80e8c32d
+
+
+###
+POST http://localhost:5000/books
+Content-Type: application/json
+
+{
+    "title": "The Lion and the Jewel",
+    "authorId": "69d169ad8d8e9deb055dbbd9",
+    "publishYear": 1963,
+    "isbn": "9780199110834",
+    "genre": "Drama",
+    "copiesOwned": 3,
+    "copiesAvailable": 3
+}
+
+
+###
+PUT http://localhost:5000/books/69d23108a5aa62fbb6d3f091
+Content-Type: application/json
+
+{
+    "title": "The Lion and the Jewel 2",
+    "authorId": "69d169ad8d8e9deb055dbbd9",
+    "publishYear": 1975,
+    "isbn": "9780199110867",
+    "genre": "Drama",
+    "copiesOwned": 7,
+    "copiesAvailable": 7
+}
+
+
+###
+DELETE http://localhost:5000/books/69d23108a5aa62fbb6d3f091
