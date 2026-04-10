@@ -2,374 +2,426 @@
   "swagger": "2.0",
   "info": {
     "title": "Library Manager API",
-    "description": "API for managing library members, book inventory, authors, and loans.",
+    "description": "API for managing authors, books, members, and loans with GitHub OAuth authentication.",
     "version": "1.0.0"
   },
   "host": "library-manager-16n6.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
+
   "paths": {
-    "/authors/": {
+
+    "/auth/github": {
       "get": {
-        "tags": [
-          "authors"
-        ],
-        "description": "Get all the authors in the collection.",
+        "tags": ["Auth"],
+        "description": "Redirect user to GitHub for authentication",
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "302": { "description": "Redirect to GitHub" }
+        }
+      }
+    },
+
+    "/auth/github/callback": {
+      "get": {
+        "tags": ["Auth"],
+        "description": "GitHub OAuth callback",
+        "responses": {
+          "200": { "description": "Authentication successful" },
+          "401": { "description": "Authentication failed" }
+        }
+      }
+    },
+
+    "/auth/logout": {
+      "get": {
+        "tags": ["Auth"],
+        "description": "Logout user",
+        "responses": {
+          "200": { "description": "Logged out successfully" }
+        }
+      }
+    },
+
+    "/authors": {
+      "get": {
+        "tags": ["Authors"],
+        "description": "Get all authors",
+        "responses": {
+          "200": { "description": "Authors retrieved" },
+          "500": { "description": "Server error" }
         }
       },
       "post": {
-        "tags": [
-          "authors"
-        ],
-        "description": "Create a new author.",
+        "tags": ["Authors"],
+        "description": "Create a new author",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
-            "description": "Author data",
+            "name": "author",
             "required": true,
             "schema": {
               "type": "object",
+              "required": ["firstName", "lastName", "dob"],
               "properties": {
-                "firstName": {
-                  "type": "string",
-                  "example": "Jane"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "Smith"
-                },
-                "nationality": {
-                  "type": "string",
-                  "example": "American"
-                },
-                "dob": {
-                  "type": "string",
-                  "example": "1980-01-01"
-                },
-                "dod": {
-                  "type": "string",
-                  "example": "2040-01-01"
-                },
-                "biography": {
-                  "type": "string",
-                  "example": "Jane Smith is a renowned author known for her fantasy novels."
-                }
-              },
-              "required": [
-                "firstName",
-                "lastName",
-                "dob"
-              ]
+                "firstName": { "type": "string", "example": "Chinua" },
+                "lastName": { "type": "string", "example": "Achebe" },
+                "nationality": { "type": "string", "example": "Nigerian" },
+                "dob": { "type": "string", "example": "1930-11-16" },
+                "dod": { "type": "string", "example": "2013-03-21" },
+                "biography": { "type": "string" }
+              }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "201": { "description": "Author created" },
+          "400": { "description": "Invalid input" }
         }
       }
     },
+
     "/authors/{id}": {
       "get": {
-        "tags": [
-          "authors"
-        ],
-        "description": "Get an author by ID.",
+        "tags": ["Authors"],
+        "description": "Get author by ID",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Author ID"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Author found" },
+          "404": { "description": "Author not found" }
         }
       },
       "put": {
-        "tags": [
-          "authors"
-        ],
-        "description": "Update an existing author by ID.",
+        "tags": ["Authors"],
+        "description": "Update author",
         "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Author ID"
-          },
-          {
-            "name": "body",
             "in": "body",
-            "description": "Author data",
-            "required": true,
+            "name": "author",
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
-                  "type": "string",
-                  "example": "Jane"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "Smith"
-                },
-                "nationality": {
-                  "type": "string",
-                  "example": "American"
-                },
-                "dob": {
-                  "type": "string",
-                  "example": "1980-01-01"
-                },
-                "dod": {
-                  "type": "string",
-                  "example": "2040-01-01"
-                },
-                "biography": {
-                  "type": "string",
-                  "example": "Jane Smith is a renowned author known for her fantasy novels."
-                }
-              },
-              "required": [
-                "firstName",
-                "lastName",
-                "dob"
-              ]
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "nationality": { "type": "string" },
+                "dob": { "type": "string" },
+                "dod": { "type": "string" },
+                "biography": { "type": "string" }
+              }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Author updated" },
+          "404": { "description": "Author not found" }
         }
       },
       "delete": {
-        "tags": [
-          "authors"
-        ],
-        "description": "Delete an existing author by ID.",
+        "tags": ["Authors"],
+        "description": "Delete author",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Author ID"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Author deleted" },
+          "404": { "description": "Author not found" }
         }
       }
     },
-    "/books/": {
+
+    "/books": {
       "get": {
-        "tags": [
-          "books"
-        ],
-        "description": "Get all books.",
+        "tags": ["Books"],
+        "description": "Get all books",
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Books retrieved" }
         }
       },
       "post": {
-        "tags": [
-          "books"
-        ],
-        "description": "Create a new book.",
+        "tags": ["Books"],
+        "description": "Create a new book",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
-            "description": "Book data",
-            "required": true,
+            "name": "book",
             "schema": {
               "type": "object",
+              "required": ["title", "authorId", "isbn"],
               "properties": {
-                "title": {
-                  "type": "string",
-                  "example": ""
-                },
-                "authorId": {
-                  "type": "string",
-                  "example": ""
-                },
-                "publishYear": {
-                  "type": "string",
-                  "example": ""
-                },
-                "isbn": {
-                  "type": "string",
-                  "example": ""
-                },
-                "genre": {
-                  "type": "string",
-                  "example": ""
-                },
-                "image": {
-                  "type": "string",
-                  "example": ""
-                },
-                "awards": {
-                  "type": "string",
-                  "example": ""
-                },
-                "copiesOwned": {
-                  "type": "string",
-                  "example": ""
-                },
-                "copiesAvailable": {
-                  "type": "string",
-                  "example": ""
-                }
-              },
-              "required": [
-                "title",
-                "authorId",
-                "isbn",
-                "copiesOwned",
-                "copiesAvailable"
-              ]
+                "title": { "type": "string" },
+                "authorId": { "type": "string" },
+                "publishYear": { "type": "string" },
+                "isbn": { "type": "string" },
+                "genre": { "type": "string" },
+                "copiesOwned": { "type": "number" },
+                "copiesAvailable": { "type": "number" }
+              }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "201": { "description": "Book created" }
         }
       }
     },
+
     "/books/{id}": {
       "get": {
-        "tags": [
-          "books"
-        ],
-        "description": "Get one book by ID.",
+        "tags": ["Books"],
+        "description": "Get book by ID",
         "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Book ID"
-          }
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Book found" }
         }
       },
       "put": {
-        "tags": [
-          "books"
-        ],
-        "description": "Update book by ID.",
+        "tags": ["Books"],
+        "description": "Update book",
         "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
           {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "Book ID"
-          },
-          {
-            "name": "body",
             "in": "body",
+            "name": "book",
             "schema": {
               "type": "object",
               "properties": {
-                "title": {
-                  "type": "string",
-                  "example": ""
-                },
-                "authorId": {
-                  "type": "string",
-                  "example": ""
-                },
-                "publishYear": {
-                  "type": "string",
-                  "example": ""
-                },
-                "isbn": {
-                  "type": "string",
-                  "example": ""
-                },
-                "genre": {
-                  "type": "string",
-                  "example": ""
-                },
-                "image": {
-                  "type": "string",
-                  "example": ""
-                },
-                "awards": {
-                  "type": "string",
-                  "example": ""
-                },
-                "copiesOwned": {
-                  "type": "string",
-                  "example": ""
-                },
-                "copiesAvailable": {
-                  "type": "string",
-                  "example": ""
-                }
-              },
-              "required": [
-                "title",
-                "authorId",
-                "isbn",
-                "copiesOwned",
-                "copiesAvailable"
-              ]
+                "title": { "type": "string" },
+                "authorId": { "type": "string" },
+                "publishYear": { "type": "string" },
+                "isbn": { "type": "string" },
+                "genre": { "type": "string" },
+                "copiesOwned": { "type": "number" },
+                "copiesAvailable": { "type": "number" }
+              }
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
-          }
+          "200": { "description": "Book updated" }
         }
       },
       "delete": {
-        "tags": [
-          "books"
+        "tags": ["Books"],
+        "description": "Delete book",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
         ],
-        "description": "Delete book by ID.",
+        "responses": {
+          "200": { "description": "Book deleted" }
+        }
+      }
+    },
+
+    "/members": {
+      "get": {
+        "tags": ["Members"],
+        "description": "Get all members (Protected)",
+        "responses": {
+          "200": { "description": "Members retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Server error" }
+        }
+      },
+      "post": {
+        "tags": ["Members"],
+        "description": "Create a new member",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "member",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["firstName", "lastName", "email", "password"],
+              "properties": {
+                "firstName": { "type": "string", "example": "John" },
+                "lastName": { "type": "string", "example": "Doe" },
+                "phone": { "type": "string", "example": "07012345678" },
+                "email": { "type": "string", "example": "john@example.com" },
+                "password": { "type": "string", "example": "password123" },
+                "status": {
+                  "type": "string",
+                  "enum": ["active", "inactive"],
+                  "example": "active"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": ["member", "admin"],
+                  "example": "member"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Member created successfully" },
+          "400": { "description": "Invalid input" }
+        }
+      }
+    },
+    
+    "/members/{id}": {
+      "get": {
+        "tags": ["Members"],
+        "description": "Get a member by ID",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "Book ID"
+            "description": "Member ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": { "description": "Member found" },
+          "404": { "description": "Member not found" }
+        }
+      },
+      "put": {
+        "tags": ["Members"],
+        "description": "Update a member (Protected)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "member",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": { "type": "string" },
+                "lastName": { "type": "string" },
+                "phone": { "type": "string" },
+                "email": { "type": "string" },
+                "password": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": ["active", "inactive"]
+                },
+                "role": {
+                  "type": "string",
+                  "enum": ["member", "admin"]
+                }
+              }
+            }
           }
+        ],
+        "responses": {
+          "200": { "description": "Member updated successfully" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Member not found" }
+        }
+      },
+      "delete": {
+        "tags": ["Members"],
+        "description": "Delete a member (Protected)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": { "description": "Member deleted successfully" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Member not found" }
+        }
+      }
+    },
+
+    "/loans": {
+      "get": {
+        "tags": ["Loans"],
+        "description": "Get all loans (Protected)",
+        "responses": {
+          "200": { "description": "Loans retrieved" },
+          "401": { "description": "Unauthorized" }
+        }
+      },
+      "post": {
+        "tags": ["Loans"],
+        "description": "Create a loan",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "loan",
+            "schema": {
+              "type": "object",
+              "required": ["memberId", "bookId", "dueDate"],
+              "properties": {
+                "memberId": { "type": "string" },
+                "bookId": { "type": "string" },
+                "dueDate": { "type": "string" },
+                "returnDate": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": ["borrowed", "returned", "overdue"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": { "description": "Loan created" }
+        }
+      }
+    },
+
+    "/loans/{id}": {
+      "get": {
+        "tags": ["Loans"],
+        "description": "Get loan by ID",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Loan found" }
+        }
+      },
+      "put": {
+        "tags": ["Loans"],
+        "description": "Update loan",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" },
+          {
+            "in": "body",
+            "name": "loan",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "returnDate": { "type": "string" },
+                "status": {
+                  "type": "string",
+                  "enum": ["borrowed", "returned", "overdue"]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Loan updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Loans"],
+        "description": "Delete loan",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "type": "string" }
+        ],
+        "responses": {
+          "200": { "description": "Loan deleted" }
         }
       }
     }

@@ -73,3 +73,76 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:5000/books/69d23108a5aa62fbb6d3f091
+
+
+###
+GET http://localhost:5000/members
+
+###
+GET http://localhost:5000/members/69d651a2daeba36642f064c2
+
+
+###
+POST http://localhost:5000/members
+Content-Type: application/json
+
+{
+"firstName": "Mary",
+"lastName": "Johnson",
+"phone": "07033334444",
+"email": "maryjohnson@example.com",
+"password": "123456"
+}
+
+
+###
+PUT http://localhost:5000/members/69d90085d5fc549d018a32a1
+Content-Type: application/json
+
+{
+"firstName": "Mary Clare",
+"lastName": "Johnson",
+"phone": "07033334467",
+"email": "maryjohnson@example.com",
+"password": "123456"
+}
+
+
+###
+DELETE http://localhost:5000/members/69d7f181ab1ac76ec22d5cfc
+
+
+###
+GET http://localhost:5000/loans
+
+
+###
+POST http://localhost:5000/loans
+Content-Type: application/json
+
+  {
+    "memberId": "645a1c5f3f1b2a1d4e8f1a22",
+    "bookId": "645a1d8f3f1b2a1d4e8f1b35",
+    "loanDate": "2026-03-20T12:00:00.000Z",
+    "dueDate": "2026-04-03T12:00:00.000Z",
+    "returnDate": "2026-04-02T14:00:00.000Z",
+    "status": "returned"
+  }
+
+
+###
+PUT http://localhost:5000/loans/69d7fa0db873a8a22c418960
+Content-Type: application/json
+
+  {
+    "memberId": "645a1c5f3f1b2a1d4e8f1a22",
+    "bookId": "69d1826437d6832b80e8c32d",
+    "loanDate": "2026-03-20T12:00:00.000Z",
+    "dueDate": "2026-04-03T12:00:00.000Z",
+    "returnDate": "2026-04-25T14:00:00.000Z",
+    "status": "returned"
+  }
+
+
+###
+DELETE http://localhost:5000/loans/69d7fa0db873a8a22c418960

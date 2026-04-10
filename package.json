@@ -3,10 +3,15 @@
     "version": "1.0.0",
     "description": "Manage library members, book inventory, authors, and loans.",
     "main": "app.js",
+    "jest": {
+        "setupFilesAfterEnv": [
+            "<rootDir>/tests/mongo.js"
+        ]
+    },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
         "build": "npm install && npm run swagger",
-        "dev": "nodemon app.js",
+        "dev": "nodemon server.js",
         "start": "node app.js",
         "lint": "eslint .",
         "lint:fix": "eslint --fix",
@@ -29,9 +34,12 @@
         "body-parser": "^2.2.2",
         "dotenv": "^17.3.1",
         "express": "^5.2.1",
+        "express-session": "^1.19.0",
         "mongodb": "^7.1.1",
         "mongoose": "^9.3.3",
         "morgan": "^1.10.1",
+        "passport": "^0.7.0",
+        "passport-github2": "^0.1.12",
         "swagger-ui-express": "^5.0.1",
         "validatorjs": "^3.22.1"
     },
@@ -41,8 +49,11 @@
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-prettier": "^5.5.5",
         "globals": "^17.4.0",
+        "jest": "^30.3.0",
+        "mongodb-memory-server": "^11.0.1",
         "nodemon": "^3.1.14",
         "prettier": "^3.8.1",
+        "supertest": "^7.2.2",
         "swagger-autogen": "^2.23.7"
     }
 }
