@@ -17,7 +17,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/authors/69da6bf815f53df680ce705e
+PUT http://localhost:5000/authors/69da8a56f468b93284853f6c
 Content-Type: application/json
 
 {
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:5000/authors/69da6bf815f53df680ce705e
+DELETE http://localhost:5000/authors/69da8a56f468b93284853f6c
 
 
 ###
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/books/69da6dc3fa0e69056ef022e3
+PUT http://localhost:5000/books/69da8aa7f468b93284853f71
 Content-Type: application/json
 
 {
@@ -72,7 +72,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:5000/books/69da6dc3fa0e69056ef022e3
+DELETE http://localhost:5000/books/69da8aa7f468b93284853f71
 
 
 ###

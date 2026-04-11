@@ -4,7 +4,7 @@ const validateMember = (req, res, next) => {
   const data = req.body;
 
   const rules = {
-    firstName: 'required|string|min:5|max:50',
+    firstName: 'required|string|min:2|max:50',
     lastName: 'required|string|min:2|max:50',
     email: 'required|email',
     password: 'required|string|min:6',

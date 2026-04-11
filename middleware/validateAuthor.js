@@ -4,7 +4,7 @@ const validateAuthor = (req, res, next) => {
   const data = req.body;
 
   const rules = {
-    firstName: 'required|string|min:5|max:50',
+    firstName: 'required|string|min:2|max:50',
     lastName: 'required|string|min:2|max:50',
     nationality: 'required|string|min:2|max:50',
     dob: 'required|string',

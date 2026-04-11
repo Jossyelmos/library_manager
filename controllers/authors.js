@@ -86,7 +86,7 @@ authorController.delete = async (req, res) => {
             return res.status(404).json({ error: "Author not found" });
         }
 
-        res.status(200).json({MSG: "Author successfully deleted"});
+        res.status(200).json({MSG: "Author deleted successfully"});
     } catch {
         res.status(500).json({ error: "Failed to delete author" });
     }

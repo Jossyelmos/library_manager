@@ -9,7 +9,7 @@
         ]
     },
     "scripts": {
-        "test": "jest",
+        "test": "set NODE_ENV=test&& jest",
         "build": "npm install && npm run swagger",
         "dev": "nodemon server.js",
         "start": "node app.js",
