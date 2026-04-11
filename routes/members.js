@@ -4,9 +4,9 @@ const auth = require("../middleware/auth");
 const {membersController} = require("../controllers");
 
 
-router.get("/", membersController.getAll);
+router.get("/", auth, membersController.getAll);
 router.post("/", membersController.create);
-router.get("/:id", membersController.get);
+router.get("/:id", auth, membersController.get);
 router.put("/:id", auth, membersController.update);
 router.delete("/:id", auth, membersController.delete);
 
