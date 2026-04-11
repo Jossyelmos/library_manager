@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 // const validation = require('./validation/authors');
-// const validateAuthor = require('./middleware/validate');
+const validateAuthor = require('../middleware/validateAuthor');
 
 const { authorsController } = require("../controllers");
 
@@ -47,6 +47,7 @@ router.post(
        }
     */
     /*validation.createRules, validateAuthor, */
+    validateAuthor,
     authorsController.create
 );
 
@@ -75,6 +76,7 @@ router.put(
        }
     */
     /*validation.updateRules, validateAuthor, */
+    validateAuthor,
     authorsController.update
 );
 

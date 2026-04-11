@@ -8,7 +8,7 @@ POST http://localhost:5000/authors
 Content-Type: application/json
 
 {
-    "firstName": "J.K.",
+    "firstName": "J.K. Grant",
     "lastName": "Rowling",
     "nationality": "British",
     "dob": "1965-07-31",
@@ -17,11 +17,11 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/authors/69d2399969288a080bf2df86
+PUT http://localhost:5000/authors/69da6bf815f53df680ce705e
 Content-Type: application/json
 
 {
-    "firstName": "J.Kennedy",
+    "firstName": "J.Kennedy Grant",
     "lastName": "Rowling",
     "nationality": "British",
     "dob": "1965-07-31",
@@ -30,7 +30,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:5000/authors/69d22ec0a5aa62fbb6d3f085
+DELETE http://localhost:5000/authors/69da6bf815f53df680ce705e
 
 
 ###
@@ -57,7 +57,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/books/69d2396869288a080bf2df83
+PUT http://localhost:5000/books/69da6dc3fa0e69056ef022e3
 Content-Type: application/json
 
 {
@@ -72,7 +72,7 @@ Content-Type: application/json
 
 
 ###
-DELETE http://localhost:5000/books/69d23108a5aa62fbb6d3f091
+DELETE http://localhost:5000/books/69da6dc3fa0e69056ef022e3
 
 
 ###
@@ -87,8 +87,8 @@ POST http://localhost:5000/members
 Content-Type: application/json
 
 {
-"firstName": "Mary",
-"lastName": "Johnson",
+"firstName": "Monroe",
+"lastName": "Collins",
 "phone": "07033334444",
 "email": "maryjohnson@example.com",
 "password": "123456"
@@ -96,20 +96,20 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/members/69d90085d5fc549d018a32a1
+PUT http://localhost:5000/members/69da70f6d3ac097a8c773ec0
 Content-Type: application/json
 
 {
-"firstName": "Mary Clare",
-"lastName": "Johnson",
-"phone": "07033334467",
+"firstName": "Monroe Clare",
+"lastName": "Collins",
+"phone": "07033334444",
 "email": "maryjohnson@example.com",
 "password": "123456"
 }
 
 
 ###
-DELETE http://localhost:5000/members/69d7f181ab1ac76ec22d5cfc
+DELETE http://localhost:5000/members/69da70f6d3ac097a8c773ec0
 
 
 ###
@@ -131,7 +131,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:5000/loans/69d7fa0db873a8a22c418960
+PUT http://localhost:5000/loans/69da6f8d5cc0a2ab3a5a62c1
 Content-Type: application/json
 
   {
@@ -140,9 +140,9 @@ Content-Type: application/json
     "loanDate": "2026-03-20T12:00:00.000Z",
     "dueDate": "2026-04-03T12:00:00.000Z",
     "returnDate": "2026-04-25T14:00:00.000Z",
-    "status": "returned"
+    "status": "overdue"
   }
 
 
 ###
-DELETE http://localhost:5000/loans/69d7fa0db873a8a22c418960
+DELETE http://localhost:5000/loans/69da6f8d5cc0a2ab3a5a62c1

@@ -47,9 +47,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log("MONGO_URL:", process.env.MONGO_URL ? "OK" : "MISSING");
-console.log("GITHUB_CLIENT_ID:", process.env.GITHUB_CLIENT_ID ? "OK" : "MISSING");
-console.log("SESSION_SECRET:", process.env.SESSION_SECRET ? "OK" : "MISSING");
 
 if (process.env.NODE_ENV === "development") {
     app.use(morgan("dev"));

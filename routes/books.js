@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { booksController } = require("../controllers");
-// const validator = require("../middleware/validate");
+const validateBook = require("../middleware/validateBook");
 
 router.get(
     "/",
@@ -46,6 +46,7 @@ router.post(
        }
     */
     /* validator.createBook, */
+    validateBook,
     booksController.create
 );
 
@@ -75,6 +76,7 @@ router.put(
        }
     */
     /* validator.updateBook, */
+    validateBook,
     booksController.update
 );
 
